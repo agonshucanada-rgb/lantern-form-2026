@@ -662,6 +662,33 @@
     * { transition: none !important; }
   }
 </style>
+
+<script>
+  // Force correct colours after all stylesheets load (defeats host-injected overrides)
+  function enforceStyles() {
+    var style = document.createElement('style');
+    style.innerHTML = [
+      '.btn-primary { background: #933121 !important; color: #fff !important; border: none !important; }',
+      '.btn-primary:disabled { background: #ddd0ce !important; color: #fff !important; }',
+      '.btn-secondary { background: none !important; color: #933121 !important; border: 1px solid #933121 !important; }',
+      '.add-btn { background: none !important; color: #933121 !important; border: 1px dashed #ddd0ce !important; }',
+      '.remove-row { background: none !important; color: #8a837c !important; border: none !important; }',
+      'a { color: #933121 !important; text-decoration: none !important; }',
+      '.subtitle { color: #933121 !important; }',
+      '.section-title { color: #1a1714 !important; }',
+      '.fee-notice strong { color: #933121 !important; }',
+      '.running-total strong { color: #933121 !important; }',
+      '.review-summary strong { color: #933121 !important; }'
+    ].join(' ');
+    document.head.appendChild(style);
+  }
+  // Run after everything has loaded
+  if (document.readyState === 'complete') {
+    enforceStyles();
+  } else {
+    window.addEventListener('load', enforceStyles);
+  }
+</script>
 </head>
 <body>
 
